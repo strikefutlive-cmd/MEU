@@ -61,7 +61,10 @@ class EmailGenerator:
                 username = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
             
             self.email = f"{username}@{domain}"
-            self.password = ''.join([chr(random.randint(65, 122)) for _ in range(12)])
+            # Generate secure password with letters, digits, and special characters
+            import string
+            chars = string.ascii_letters + string.digits + "!@#$%^&*"
+            self.password = ''.join(random.choice(chars) for _ in range(12))
             
             # Create account
             payload = {

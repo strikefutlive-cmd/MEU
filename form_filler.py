@@ -6,6 +6,7 @@ import logging
 import time
 from typing import Dict, Any, List
 from selenium.webdriver.common.by import By
+from selenium.common.exceptions import StaleElementReferenceException
 from selenium_utils import SeleniumHelper
 
 logger = logging.getLogger(__name__)
@@ -108,7 +109,7 @@ class FormFiller:
                             element = self.helper.find_element_safe(By.ID, label_for)
                             if element:
                                 matching_elements.append(element)
-        except Exception as e:
+        except (AttributeError, StaleElementReferenceException) as e:
             logger.debug(f"Error in label strategy: {e}")
         
         # Remove duplicates while preserving order
@@ -120,7 +121,8 @@ class FormFiller:
                 if elem_id not in seen:
                     seen.add(elem_id)
                     unique_elements.append(elem)
-            except:
+            except (AttributeError, StaleElementReferenceException):
+                # Element may have become stale, skip it
                 pass
         
         if unique_elements:
