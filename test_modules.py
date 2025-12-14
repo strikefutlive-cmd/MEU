@@ -41,6 +41,8 @@ def test_data_handler():
         assert 'cpf' in data, "Data should contain CPF"
         assert 'cep_primeiro' in data, "Data should contain CEP primeiro"
         assert 'cep_segundo' in data, "Data should contain CEP segundo"
+        assert 'confirmar_senha' in data, "Data should contain confirmar_senha"
+        assert data['senha'] == data['confirmar_senha'], "senha and confirmar_senha should match"
         
         logger.info("✓ DataHandler tests passed")
         return True

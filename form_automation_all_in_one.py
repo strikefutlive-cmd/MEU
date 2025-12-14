@@ -395,6 +395,7 @@ class DataHandler:
         """
         cep = self.generate_cep()
         cep_primeiro, cep_segundo = self.split_cep(cep)
+        senha = self.generate_password()
         
         data = {
             'nome': self.generate_name(True),
@@ -408,7 +409,8 @@ class DataHandler:
             'cep_primeiro': cep_primeiro,
             'cep_segundo': cep_segundo,
             'data_nascimento': self.generate_date_of_birth(),
-            'senha': self.generate_password(),
+            'senha': senha,
+            'confirmar_senha': senha,
         }
         
         self.data = data

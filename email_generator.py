@@ -5,6 +5,8 @@ Handles temporary email creation using mail.tm API
 import requests
 import logging
 import time
+import random
+import string
 from typing import Optional, Dict, Tuple
 
 logger = logging.getLogger(__name__)
@@ -56,13 +58,10 @@ class EmailGenerator:
             
             # Generate username if not provided
             if not username:
-                import random
-                import string
                 username = ''.join(random.choices(string.ascii_lowercase + string.digits, k=10))
             
             self.email = f"{username}@{domain}"
             # Generate secure password with letters, digits, and special characters
-            import string
             chars = string.ascii_letters + string.digits + "!@#$%^&*"
             self.password = ''.join(random.choice(chars) for _ in range(12))
             
